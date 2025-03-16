@@ -1,66 +1,371 @@
-# C#中的注释
+# C#教程
 
-在C#中，注释用于解释代码，提高代码的可读性，或临时禁用某些代码。C#支持三种注释方式：
+C# 是一个简单的、现代的、通用的、面向对象的编程语言，它是由微软（Microsoft）开发的。
 
-### 1. 单行注释
-使用 `//` 进行单行注释，从 `//` 开始到行末的内容都会被编译器忽略。
+本教程将告诉您基础的 C# 编程，同时将向您讲解 C# 编程语言相关的各种先进理念。
 
-```c#
-// 这是一个单行注释
-int x = 10; // 初始化变量x为10
-```
+## 编译/执行 C# 程序
 
-### 2. 多行注释
-使用 `/*` 和 `*/` 进行多行注释，`/*` 和 `*/` 之间的所有内容都会被编译器忽略。
+菜鸟教程提供了在线的 C# 在线编译环境，您只需进行简单的点击动作，即可在高端的服务器上体验真实的编程经验。这是完全免费的在线工具。
 
 ```c#
-/* 这是一个多行注释
-   可以跨越多行 */
-int y = 20; /* 初始化变量y为20 */
-```
-
-### 3. XML文档注释
-使用 `///` 进行XML文档注释，通常用于生成代码文档。这些注释可以包含XML标签，如 `<summary>`、`<param>`、`<returns>` 等。
-
-```c#
-/// <summary>
-/// 这是一个方法的XML文档注释
-/// </summary>
-/// <param name="a">参数a的说明</param>
-/// <param name="b">参数b的说明</param>
-/// <returns>返回值的说明</returns>
-public int Add(int a, int b)
+using System;
+namespace HelloWorldApplication
 {
-    return a + b;
+    /* 类名为 HelloWorld */
+    class HelloWorld
+    {
+        /* main函数 */
+        static void Main(string[] args)
+        {
+            /* 我的第一个 C# 程序 */
+            Console.WriteLine("Hello World!");
+            Console.ReadKey();
+        }
+    }
 }
 ```
 
-### 注释的使用场景
-- **解释代码**：帮助其他开发者理解代码的意图。
-- **调试代码**：临时禁用某些代码段以进行调试。
-- **生成文档**：使用XML文档注释生成API文档。
+# C# 简介
+
+C# 是一个现代的、通用的、面向对象的编程语言，它是由微软（Microsoft）开发的，由 Ecma 和 ISO 核准认可的。
+
+C# 是由 Anders Hejlsberg 和他的团队在 .Net 框架开发期间开发的。
+
+C# 是专为公共语言基础结构（CLI）设计的。CLI 由可执行代码和运行时环境组成，允许在不同的计算机平台和体系结构上使用各种高级语言。
+
+下面列出了 C# 成为一种广泛应用的专业语言的原因：
+
+- 现代的、通用的编程语言。
+- 面向对象。
+- 面向组件。
+- 容易学习。
+- 结构化语言。
+- 它产生高效率的程序。
+- 它可以在多种计算机平台上编译。
+- .Net 框架的一部分。
+
+## C# 强大的编程功能
+
+虽然 C# 的构想十分接近于传统高级语言 C 和 C++，是一门面向对象的编程语言，但是它与 Java 非常相似，有许多强大的编程功能，因此得到广大程序员的青睐。
+
+下面列出 C# 一些重要的功能：
+
+- 布尔条件（Boolean Conditions）
+- 自动垃圾回收（Automatic Garbage Collection）
+- 标准库（Standard Library）
+- 组件版本（Assembly Versioning）
+- 属性（Properties）和事件（Events）
+- 委托（Delegates）和事件管理（Events Management）
+- 易于使用的泛型（Generics）
+- 索引器（Indexers）
+- 条件编译（Conditional Compilation）
+- 简单的多线程（Multithreading）
+- LINQ 和 Lambda 表达式
+- 集成 Windows
+
+# C#基本语法
+
+C# 是一种面向对象的编程语言。在面向对象的程序设计方法中，程序由各种相互交互的对象组成。相同种类的对象通常具有相同的类型，或者说，是在相同的 class 中。
+
+例如，以 Rectangle（矩形）对象为例。它具有 length 和 width 属性。根据设计，它可能需要接受这些属性值、计算面积和显示细节。
+
+让我们来看看一个 Rectangle（矩形）类的实现，并借此讨论 C# 的基本语法：
+
+```c#
+using System;
+namespace RectangleApplication
+{
+    class Rectangle
+    {
+        // 成员变量
+        double length;
+        double width;
+        public void Acceptdetails()
+        {
+            length = 4.5;    
+            width = 3.5;
+        }
+        public double GetArea()
+        {
+            return length * width;
+        }
+        public void Display()
+        {
+            Console.WriteLine("Length: {0}", length);
+            Console.WriteLine("Width: {0}", width);
+            Console.WriteLine("Area: {0}", GetArea());
+        }
+    }
+    
+    class ExecuteRectangle
+    {
+        static void Main(string[] args)
+        {
+            Rectangle r = new Rectangle();
+            r.Acceptdetails();
+            r.Display();
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```
+Length: 4.5
+Width: 3.5
+Area: 15.75
+```
+
+## *using* 关键字
+
+在任何 C# 程序中的第一条语句都是：
+
+```
+using System;
+```
+
+**using** 关键字用于在程序中包含命名空间。一个程序可以包含多个 using 语句。
+
+## *class* 关键字
+
+**class** 关键字用于声明一个类。
+
+## C# 中的注释
+
+注释是用于解释代码。编译器会忽略注释的条目。在 C# 程序中，多行注释以 **/\*** 开始，并以字符 ***/** 终止，如下所示：
+
+```
+/* 这个程序演示
+C# 的注释
+使用 */
+```
+
+单行注释是用 **//** 符号表示。例如：
+
+```
+// 这一行是注释 
+```
+
+## 成员变量
+
+变量是类的属性或数据成员，用于存储数据。在上面的程序中，*Rectangle* 类有两个成员变量，名为 *length* 和 *width*。
+
+## 成员函数
+
+函数是一系列执行指定任务的语句。类的成员函数是在类内声明的。我们举例的类 Rectangle 包含了三个成员函数： *AcceptDetails*、*GetArea* 和 *Display*。
+
+## 实例化一个类
+
+在上面的程序中，类 *ExecuteRectangle* 是一个包含 *Main()* 方法和实例化 *Rectangle* 类的类。
+
+## 标识符
+
+标识符是用来识别类、变量、函数或任何其它用户定义的项目。在 C# 中，类的命名必须遵循如下基本规则：
+
+- 标识符必须以字母、下划线或 **@** 开头，后面可以跟一系列的字母、数字（ 0 - 9 ）、下划线（ _ ）、@。
+- 标识符中的第一个字符不能是数字。
+- 标识符必须不包含任何嵌入的空格或符号，比如 ? - +! # % ^ & * ( ) [ ] { } . ; : " ' / \。
+- 标识符不能是 C# 关键字。除非它们有一个 @ 前缀。 例如，@if 是有效的标识符，但 if 不是，因为 if 是关键字。
+- 标识符必须区分大小写。大写字母和小写字母被认为是不同的字母。
+- 不能与C#的类库名称相同。
+
+## C# 关键字
+
+关键字是 C# 编译器预定义的保留字。这些关键字不能用作标识符，但是，如果您想使用这些关键字作为标识符，可以在关键字前面加上 @ 字符作为前缀。
+
+在 C# 中，有些关键字在代码的上下文中有特殊的意义，如 get 和 set，这些被称为上下文关键字（contextual keywords）。
+
+下表列出了 C# 中的保留关键字（Reserved Keywords）和上下文关键字（Contextual Keywords）：
+
+| **保留关键字**   |           |           |            |                        |                       |                |
+| ---------------- | --------- | --------- | ---------- | ---------------------- | --------------------- | -------------- |
+| abstract         | as        | base      | bool       | break                  | byte                  | case           |
+| catch            | char      | checked   | class      | const                  | continue              | decimal        |
+| default          | delegate  | do        | double     | else                   | enum                  | event          |
+| explicit         | extern    | false     | finally    | fixed                  | float                 | for            |
+| foreach          | goto      | if        | implicit   | in                     | in (generic modifier) | int            |
+| interface        | internal  | is        | lock       | long                   | namespace             | new            |
+| null             | object    | operator  | out        | out (generic modifier) | override              | params         |
+| private          | protected | public    | readonly   | ref                    | return                | sbyte          |
+| sealed           | short     | sizeof    | stackalloc | static                 | string                | struct         |
+| switch           | this      | throw     | true       | try                    | typeof                | uint           |
+| ulong            | unchecked | unsafe    | ushort     | using                  | virtual               | void           |
+| volatile         | while     |           |            |                        |                       |                |
+| **上下文关键字** |           |           |            |                        |                       |                |
+| add              | alias     | ascending | descending | dynamic                | from                  | get            |
+| global           | group     | into      | join       | let                    | orderby               | partial (type) |
+| partial (method) | remove    | select    | set        |                        |                       |                |
+
+## 顶级语句（Top-Level Statements）
+
+在 C# 9.0 版本中，引入了顶级语句（Top-Level Statements）的概念，这是一种新的编程范式，允许开发者在文件的顶层直接编写语句，而不需要将它们封装在方法或类中。
+
+**特点：**
+
+- **无需类或方法**：顶级语句允许你直接在文件的顶层编写代码，无需定义类或方法。
+- **文件作为入口点**：包含顶级语句的文件被视为程序的入口点，类似于 C# 之前的 `Main` 方法。
+- **自动 `Main` 方法**：编译器会自动生成一个 `Main` 方法，并将顶级语句作为 `Main` 方法的主体。
+- **支持局部函数**：尽管不需要定义类，但顶级语句的文件中仍然可以定义局部函数。
+- **更好的可读性**：对于简单的脚本或工具，顶级语句提供了更好的可读性和简洁性。
+- **适用于小型项目**：顶级语句非常适合小型项目或脚本，可以快速编写和运行代码。
+- **与现有代码兼容**：顶级语句可以与现有的 C# 代码库一起使用，不会影响现有代码。
+
+**传统 C# 代码** - 在使用顶级语句之前，你必须像这样编写一个 C# 程序：
+
+```c#
+using System;
+
+namespace MyApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+        }
+    }
+}
+```
+
+**使用顶级语句的 C# 代码** - 使用顶级语句，可以简化为：
+
+```c#
+using System;
+
+Console.WriteLine("Hello, World!");
+```
+
+顶级语句支持所有常见的 C# 语法，包括声明变量、定义方法、处理异常等。
+
+```
+using System;
+using System.Linq;
+
+// 顶级语句中的变量声明
+int number = 42;
+string message = "The answer to life, the universe, and everything is";
+
+// 输出变量
+Console.WriteLine($"{message} {number}.");
+
+// 定义和调用方法
+int Add(int a, int b) => a + b;
+Console.WriteLine($"Sum of 1 and 2 is {Add(1, 2)}.");
+
+// 使用 LINQ
+var numbers = new[] { 1, 2, 3, 4, 5 };
+var evens = numbers.Where(n => n % 2 == 0).ToArray();
+Console.WriteLine("Even numbers: " + string.Join(", ", evens));
+
+// 异常处理
+try
+{
+    int zero = 0;
+    int result = number / zero;
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+```
 
 ### 注意事项
-- 注释应简洁明了，避免过度注释。
-- 及时更新注释，确保注释与代码一致。
-- 避免使用注释来注释掉不再使用的代码，应直接删除。
 
-通过合理使用注释，可以提高代码的可维护性和可读性。
+- **文件限制：**顶级语句只能在一个源文件中使用。如果在一个项目中有多个使用顶级语句的文件，会导致编译错误。
+- **程序入口：**如果使用顶级语句，则该文件会隐式地包含 Main 方法，并且该文件将成为程序的入口点。
+- **作用域限制：**顶级语句中的代码共享一个全局作用域，这意味着可以在顶级语句中定义的变量和方法可以在整个文件中访问。
 
-
+顶级语句在简化代码结构、降低学习难度和加快开发速度方面具有显著优势，特别适合于编写简单程序和脚本。
 
 # C#常用快捷键
 
-| 快捷键                  | 方法                         |
-| ----------------------- | ---------------------------- |
-| **Ctrl+K+D**            | **快速对齐代码**             |
-| **Ctrl+Z**              | **撤销**                     |
-| **Ctrl+S**              | **保存（一定要经常保存！）** |
-| **Ctrl+J**              | **快速弹出智能提示**         |
-| **Ctrl+K+C**            | **注释所选代码**             |
-| **Ctr+K+U**             | **取消对所选代码的注释**     |
-| **F1**                  | **转到帮助文档**             |
-| **#Region和#EndRegion** | **折叠冗余代码**             |
+### 常用快捷方式
+
+| 快捷键                     | 功能                 |
+| :------------------------- | :------------------- |
+| Ctrl + K + C               | 注释选定内容         |
+| Ctrl + K + U               | 取消注释选定内容     |
+| Ctrl + K + D               | 代码格式整个文档内容 |
+| Ctrl + K + F               | 格式化选定内容       |
+| F12                        | 转到定义             |
+| Ctrl+F12                   | 转到声明             |
+| Ctrl + -                   | 后退                 |
+| Ctrl + Shift + -           | 前进                 |
+| Ctrl + M + O               | 折叠当前代码块       |
+| Ctrl + M + P               | 展开当前代码块       |
+| Ctrl + M + M               | 切换大纲显示展开     |
+| Ctrl + R + M               | 重构.提取方法        |
+| Ctrl+Shift+K、Ctrl+Shift+P | 文件夹中的上一个书签 |
+| Ctrl + Z                   | 撤销                 |
+| Ctrl + X                   | 剪切                 |
+| Ctrl + C                   | 复制                 |
+| Ctrl + V                   | 粘贴                 |
+| Ctrl+A                     | 全选                 |
+
+### 文件操作
+
+| 快捷键           | 功能       |
+| :--------------- | :--------- |
+| Ctrl + N         | 新建文件   |
+| Ctrl + O         | 打开文件   |
+| Ctrl + S         | 保存文件   |
+| Ctrl + Shift + S | 文件另存为 |
+| F2               | 文件重命名 |
+
+### 查找与替换
+
+| 快捷键           | 功能         |
+| :--------------- | :----------- |
+| Ctrl + F         | 查找         |
+| Ctrl + H         | 替换         |
+| Shift+F12        | 查找所有引用 |
+| Ctrl + Shift + F | 在文件中查找 |
+| Ctrl + Shift + H | 在文件中替换 |
+| Ctrl + Shift + V | 循环剪贴板环 |
+
+### 调试与运行
+
+| 快捷键         | 功能           |
+| :------------- | :------------- |
+| F5             | 启动调试       |
+| Ctrl+F5        | 开始执行不调试 |
+| Shift + F5     | 停止调试       |
+| F9             | 切换断点       |
+| Ctrl+Shift+F9  | 删除所有断点   |
+| F10            | 单步逐过程执行 |
+| F11            | 逐语句调试     |
+| Shift + F11    | 单步跳出       |
+| Ctrl+Shift+F10 | 设置下一语句   |
+| Ctrl+Alt+Q     | 快速监视       |
+
+### 窗口管理
+
+| 快捷键             | 功能                 |
+| :----------------- | :------------------- |
+| Ctrl + Tab         | 切换到下一个文档窗口 |
+| Ctrl + Shift + Tab | 切换到上一个文档窗口 |
+| Alt+`              | 窗口搜索             |
+| Alt+F7             | 下一个工具窗口导航   |
+| Ctrl+F4            | 关闭文档窗口         |
+| Ctrl+F6            | 下一个文档窗口       |
+
+### 其他
+
+| 快捷键       | 功能                   |
+| :----------- | :--------------------- |
+| Shift+Alt+A  | 添加现有项目           |
+| Ctrl+Shift+A | 添加新项目             |
+| Ctrl+Alt+P   | 附加到进程             |
+| Ctrl+Shift+C | 查看类视图             |
+| Ctrl+Alt+X   | 工具箱                 |
+| Ctrl+Shift+B | 生成解决方案           |
+| Ctrl+Break   | 生成取消               |
+| Ctrl+F7      | 生成编译               |
+| Alt+F11      | 对解决方案运行代码分析 |
+| Ctrl+Alt+O   | 输出                   |
 
 
 
@@ -295,6 +600,329 @@ public class Program
 - **保持描述性**：变量名应清晰、简洁且具有描述性，避免使用无意义的缩写或单个字母。
 
 遵循这些命名规范可以使代码更易于阅读、理解和维护。
+
+# 类型转换方法
+
+在 C# 中，类型转换是将一个数据类型的值转换为另一个数据类型的过程。
+
+C# 中的类型转换可以分为两种：**隐式类型转换**和**显式类型转换**（也称为强制类型转换）。
+
+### 隐式类型转换
+
+隐式转换是不需要编写代码来指定的转换，编译器会自动进行。
+
+隐式转换是指将一个较小范围的数据类型转换为较大范围的数据类型时，编译器会自动完成类型转换，这些转换是 C# 默认的以安全方式进行的转换, 不会导致数据丢失。
+
+例如，从 int 到 long，从 float 到 double 等。
+
+从小的整数类型转换为大的整数类型，从派生类转换为基类。将一个 byte 类型的变量赋值给 int 类型的变量，编译器会自动将 byte 类型转换为 int 类型，不需要显示转换。
+
+```c#
+byte b = 10;
+int i = b; // 隐式转换，不需要显式转换
+```
+
+将一个整数赋值给一个长整数，或者将一个浮点数赋值给一个双精度浮点数，这种转换不会导致数据丢失：
+
+```
+int intValue = 42;
+long longValue = intValue; // 隐式转换，从 int 到 long
+```
+
+### 显式转换
+
+显式类型转换，即强制类型转换，需要程序员在代码中明确指定。
+
+显式转换是指将一个较大范围的数据类型转换为较小范围的数据类型时，或者将一个对象类型转换为另一个对象类型时，需要使用强制类型转换符号进行显示转换，强制转换会造成数据丢失。
+
+例如，将一个 int 类型的变量赋值给 byte 类型的变量，需要显示转换。
+
+```
+int i = 10;
+byte b = (byte)i; // 显式转换，需要使用强制类型转换符号
+```
+
+强制转换为整数类型：
+
+```
+double doubleValue = 3.14;
+int intValue = (int)doubleValue; // 强制从 double 到 int，数据可能损失小数部分
+```
+
+强制转换为字符串类型：
+
+```
+int intValue = 123;
+string stringValue = intValue.ToString(); // 将 int 转换为字符串
+```
+
+下面的实例显示了一个显式的类型转换：
+
+```
+using System;
+
+namespace TypeConversionApplication
+{
+    class ExplicitConversion
+    {
+        static void Main(string[] args)
+        {
+            double d = 5673.74;
+            int i;
+
+            // 强制转换 double 为 int
+            i = (int)d;
+            Console.WriteLine(i);
+            Console.ReadKey();
+            
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```
+5673
+```
+
+## C# 类型转换方法
+
+C# 提供了下列内置的类型转换方法：
+
+| 序号 | 方法 & 描述                                                  |
+| :--- | :----------------------------------------------------------- |
+| 1    | **ToBoolean** 如果可能的话，把类型转换为布尔型。             |
+| 2    | **ToByte** 把类型转换为字节类型。                            |
+| 3    | **ToChar** 如果可能的话，把类型转换为单个 Unicode 字符类型。 |
+| 4    | **ToDateTime** 把类型（整数或字符串类型）转换为 日期-时间 结构。 |
+| 5    | **ToDecimal** 把浮点型或整数类型转换为十进制类型。           |
+| 6    | **ToDouble** 把类型转换为双精度浮点型。                      |
+| 7    | **ToInt16** 把类型转换为 16 位整数类型。                     |
+| 8    | **ToInt32** 把类型转换为 32 位整数类型。                     |
+| 9    | **ToInt64** 把类型转换为 64 位整数类型。                     |
+| 10   | **ToSbyte** 把类型转换为有符号字节类型。                     |
+| 11   | **ToSingle** 把类型转换为小浮点数类型。                      |
+| 12   | **ToString** 把类型转换为字符串类型。                        |
+| 13   | **ToType** 把类型转换为指定类型。                            |
+| 14   | **ToUInt16** 把类型转换为 16 位无符号整数类型。              |
+| 15   | **ToUInt32** 把类型转换为 32 位无符号整数类型。              |
+| 16   | **ToUInt64** 把类型转换为 64 位无符号整数类型。              |
+
+这些方法都定义在 System.Convert 类中，使用时需要包含 System 命名空间。它们提供了一种安全的方式来执行类型转换，因为它们可以处理 null值，并且会抛出异常，如果转换不可能进行。
+
+例如，使用 Convert.ToInt32 方法将字符串转换为整数：
+
+```
+string str = "123";
+int number = Convert.ToInt32(str); // 转换成功，number为123
+```
+
+如果字符串不是有效的整数表示，Convert.ToInt32 将抛出 FormatException。
+
+下面的实例把不同值的类型转换为字符串类型：
+
+```
+using System;
+
+namespace TypeConversionApplication
+{
+    class StringConversion
+    {
+        static void Main(string[] args)
+        {
+            // 定义一个整型变量
+            int i = 75;
+            
+            // 定义一个浮点型变量
+            float f = 53.005f;
+            
+            // 定义一个双精度浮点型变量
+            double d = 2345.7652;
+            
+            // 定义一个布尔型变量
+            bool b = true;
+
+            // 将整型变量转换为字符串并输出
+            Console.WriteLine(i.ToString());
+            
+            // 将浮点型变量转换为字符串并输出
+            Console.WriteLine(f.ToString());
+            
+            // 将双精度浮点型变量转换为字符串并输出
+            Console.WriteLine(d.ToString());
+            
+            // 将布尔型变量转换为字符串并输出
+            Console.WriteLine(b.ToString());
+
+            // 等待用户按键后关闭控制台窗口
+            Console.ReadKey();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```
+75
+53.005
+2345.7652
+True
+```
+
+在进行类型转换时需要注意以下几点：
+
+- 隐式转换只能将较小范围的数据类型转换为较大范围的数据类型，不能将较大范围的数据类型转换为较小范围的数据类型；
+- 显式转换可能会导致数据丢失或精度降低，需要进行数据类型的兼容性检查；
+- 对于对象类型的转换，需要进行类型转换的兼容性检查和类型转换的安全性检查。
+
+## 类型转换方法
+
+C# 提供了多种类型转换方法，例如使用 Convert 类、Parse 方法和 TryParse 方法，这些方法可以帮助处理不同的数据类型之间的转换。
+
+### 使用 Convert 类
+
+Convert 类提供了一组静态方法，可以在各种基本数据类型之间进行转换。
+
+```
+string str = "123";
+int num = Convert.ToInt32(str);
+```
+
+### 使用 Parse 方法
+
+Parse 方法用于将字符串转换为对应的数值类型，如果转换失败会抛出异常。
+
+```
+string str = "123.45";
+double d = double.Parse(str);
+```
+
+### 使用 TryParse 方法
+
+TryParse 方法类似于 Parse，但它不会抛出异常，而是返回一个布尔值指示转换是否成功。
+
+```
+string str = "123.45";
+double d;
+bool success = double.TryParse(str, out d);
+
+if (success) {
+    Console.WriteLine("转换成功: " + d);
+} else {
+    Console.WriteLine("转换失败");
+}
+```
+
+## 自定义类型转换
+
+C# 还允许你定义自定义类型转换操作，通过在类型中定义 implicit 或 explicit 关键字。
+
+```
+using System;
+
+public class Fahrenheit
+{
+    public double Degrees { get; set; }
+
+    public Fahrenheit(double degrees)
+    {
+        Degrees = degrees;
+    }
+
+    // 隐式转换从Fahrenheit到double
+    public static implicit operator double(Fahrenheit f)
+    {
+        return f.Degrees;
+    }
+
+    // 显式转换从double到Fahrenheit
+    public static explicit operator Fahrenheit(double d)
+    {
+        return new Fahrenheit(d);
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Fahrenheit f = new Fahrenheit(98.6);
+        Console.WriteLine("Fahrenheit object: " + f.Degrees + " degrees");
+
+        double temp = f; // 隐式转换
+        Console.WriteLine("After implicit conversion to double: " + temp + " degrees");
+
+        Fahrenheit newF = (Fahrenheit)temp; // 显式转换
+        Console.WriteLine("After explicit conversion back to Fahrenheit: " + newF.Degrees + " degrees");
+    }
+}
+```
+
+以上例子中，我们定义了一个 Fahrenheit 类，并实现了从 Fahrenheit 到 double 的隐式转换和从 double 到 Fahrenheit 的显式转换。
+
+输出结果将显示如下：
+
+```
+Fahrenheit object: 98.6 degrees
+After implicit conversion to double: 98.6 degrees
+After explicit conversion back to Fahrenheit: 98.6 degrees
+```
+
+## 总结
+
+在 C# 中，内置的类型转换方法主要通过以下几种方式实现：隐式转换、显式转换（强制转换）、使用 Convert 类的方法、Parse 方法和 TryParse 方法，这些方法广泛应用于不同数据类型之间的转换。
+
+以下是 C# 内置类型转换方法的表格：
+
+| **方法类别**         | **方法**                                  | **描述**                                                     |
+| :------------------- | :---------------------------------------- | :----------------------------------------------------------- |
+| 隐式转换             | 自动进行的转换                            | 无需显式指定，通常用于安全的类型转换，如从较小类型到较大类型 |
+| 显式转换（强制转换） | `(type)value`                             | 需要显式指定，通常用于可能导致数据丢失或转换失败的情况       |
+| `Convert` 类方法     | `Convert.ToBoolean(value)`                | 将指定类型转换为 `Boolean`                                   |
+|                      | `Convert.ToByte(value)`                   | 将指定类型转换为 `Byte`                                      |
+|                      | `Convert.ToChar(value)`                   | 将指定类型转换为 `Char`                                      |
+|                      | `Convert.ToDateTime(value)`               | 将指定类型转换为 `DateTime`                                  |
+|                      | `Convert.ToDecimal(value)`                | 将指定类型转换为 `Decimal`                                   |
+|                      | `Convert.ToDouble(value)`                 | 将指定类型转换为 `Double`                                    |
+|                      | `Convert.ToInt16(value)`                  | 将指定类型转换为 `Int16`（短整型）                           |
+|                      | `Convert.ToInt32(value)`                  | 将指定类型转换为 `Int32`（整型）                             |
+|                      | `Convert.ToInt64(value)`                  | 将指定类型转换为 `Int64`（长整型）                           |
+|                      | `Convert.ToSByte(value)`                  | 将指定类型转换为 `SByte`                                     |
+|                      | `Convert.ToSingle(value)`                 | 将指定类型转换为 `Single`（单精度浮点型）                    |
+|                      | `Convert.ToString(value)`                 | 将指定类型转换为 `String`                                    |
+|                      | `Convert.ToUInt16(value)`                 | 将指定类型转换为 `UInt16`（无符号短整型）                    |
+|                      | `Convert.ToUInt32(value)`                 | 将指定类型转换为 `UInt32`（无符号整型）                      |
+|                      | `Convert.ToUInt64(value)`                 | 将指定类型转换为 `UInt64`（无符号长整型）                    |
+| `Parse` 方法         | `Boolean.Parse(string)`                   | 将字符串解析为 `Boolean`                                     |
+|                      | `Byte.Parse(string)`                      | 将字符串解析为 `Byte`                                        |
+|                      | `Char.Parse(string)`                      | 将字符串解析为 `Char`                                        |
+|                      | `DateTime.Parse(string)`                  | 将字符串解析为 `DateTime`                                    |
+|                      | `Decimal.Parse(string)`                   | 将字符串解析为 `Decimal`                                     |
+|                      | `Double.Parse(string)`                    | 将字符串解析为 `Double`                                      |
+|                      | `Int16.Parse(string)`                     | 将字符串解析为 `Int16`                                       |
+|                      | `Int32.Parse(string)`                     | 将字符串解析为 `Int32`                                       |
+|                      | `Int64.Parse(string)`                     | 将字符串解析为 `Int64`                                       |
+|                      | `SByte.Parse(string)`                     | 将字符串解析为 `SByte`                                       |
+|                      | `Single.Parse(string)`                    | 将字符串解析为 `Single`                                      |
+|                      | `UInt16.Parse(string)`                    | 将字符串解析为 `UInt16`                                      |
+|                      | `UInt32.Parse(string)`                    | 将字符串解析为 `UInt32`                                      |
+|                      | `UInt64.Parse(string)`                    | 将字符串解析为 `UInt64`                                      |
+| `TryParse` 方法      | `Boolean.TryParse(string, out bool)`      | 尝试将字符串解析为 `Boolean`，返回布尔值表示是否成功         |
+|                      | `Byte.TryParse(string, out byte)`         | 尝试将字符串解析为 `Byte`，返回布尔值表示是否成功            |
+|                      | `Char.TryParse(string, out char)`         | 尝试将字符串解析为 `Char`，返回布尔值表示是否成功            |
+|                      | `DateTime.TryParse(string, out DateTime)` | 尝试将字符串解析为 `DateTime`，返回布尔值表示是否成功        |
+|                      | `Decimal.TryParse(string, out decimal)`   | 尝试将字符串解析为 `Decimal`，返回布尔值表示是否成功         |
+|                      | `Double.TryParse(string, out double)`     | 尝试将字符串解析为 `Double`，返回布尔值表示是否成功          |
+|                      | `Int16.TryParse(string, out short)`       | 尝试将字符串解析为 `Int16`，返回布尔值表示是否成功           |
+|                      | `Int32.TryParse(string, out int)`         | 尝试将字符串解析为 `Int32`，返回布尔值表示是否成功           |
+|                      | `Int64.TryParse(string, out long)`        | 尝试将字符串解析为 `Int64`，返回布尔值表示是否成功           |
+|                      | `SByte.TryParse(string, out sbyte)`       | 尝试将字符串解析为 `SByte`，返回布尔值表示是否成功           |
+|                      | `Single.TryParse(string, out float)`      | 尝试将字符串解析为 `Single`，返回布尔值表示是否成功          |
+|                      | `UInt16.TryParse(string, out ushort)`     | 尝试将字符串解析为 `UInt16`，返回布尔值表示是否成功          |
+|                      | `UInt32.TryParse(string, out uint)`       | 尝试将字符串解析为 `UInt32`，返回布尔值表示是否成功          |
+|                      | `UInt64.TryParse(string, out ulong)`      | 尝试将字符串解析为 `UInt64`，返回布尔值表示是否成功          |
 
 # 赋值运算
 
@@ -880,3 +1508,262 @@ class Program
 | %      | 取模运算符，整除后的余数         | B % A 将得到 0   |
 | ++     | 自增运算符，整数值增加 1         | A++ 将得到 11    |
 | --     | 自减运算符，整数值减少 1         | A-- 将得到 9     |
+
+# C# ++ 和--
+
+- **c = a++**: 先将 a 赋值给 c，再对 a 进行自增运算。
+- **c = ++a**: 先将 a 进行自增运算，再将 a 赋值给 c 。
+- **c = a--**: 先将 a 赋值给 c，再对 a 进行自减运算。
+- **c = --a**: 先将 a 进行自减运算，再将 a 赋值给 c 。
+
+```c#
+using System;
+
+namespace DataTypeApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 1;
+            int b;
+
+            // a++ 先赋值再进行自增运算
+            b = a++; //b
+            Console.WriteLine("a = {0}", a);
+            Console.WriteLine("b = {0}", b);
+            Console.ReadLine();
+
+            // ++a 先进行自增运算再赋值
+            a = 1; // 重新初始化 a
+            b = ++a;
+            Console.WriteLine("a = {0}", a);
+            Console.WriteLine("b = {0}", b);
+            Console.ReadLine();
+
+            // a-- 先赋值再进行自减运算
+            a = 1;  // 重新初始化 a
+            b = a--;
+            Console.WriteLine("a = {0}", a);
+            Console.WriteLine("b = {0}", b);
+            Console.ReadLine();
+
+            // --a 先进行自减运算再赋值
+            a = 1;  // 重新初始化 a
+            b = --a;
+            Console.WriteLine("a = {0}", a);
+            Console.WriteLine("b = {0}", b);
+            Console.ReadLine();
+        }
+    }
+}
+
+```
+
+执行以上程序，输出结果为：
+
+```c#
+a = 2
+b = 1
+a = 2
+b = 2
+a = 0
+b = 1
+a = 0
+b = 0
+```
+
+# 关系运算符
+
+下表显示了 C# 支持的所有关系运算符。假设变量 **A** 的值为 10，变量 **B** 的值为 20，则：
+
+| 运算符 | 描述                                                         | 实例              |
+| :----- | :----------------------------------------------------------- | :---------------- |
+| ==     | 检查两个操作数的值是否相等，如果相等则条件为真。             | (A == B) 不为真。 |
+| !=     | 检查两个操作数的值是否相等，如果不相等则条件为真。           | (A != B) 为真。   |
+| >      | 检查左操作数的值是否大于右操作数的值，如果是则条件为真。     | (A > B) 不为真。  |
+| <      | 检查左操作数的值是否小于右操作数的值，如果是则条件为真。     | (A < B) 为真。    |
+| >=     | 检查左操作数的值是否大于或等于右操作数的值，如果是则条件为真。 | (A >= B) 不为真。 |
+| <=     | 检查左操作数的值是否小于或等于右操作数的值，如果是则条件为真。 | (A <= B) 为真。   |
+
+### 实例
+
+请看下面的实例，了解 C# 中所有可用的关系运算符：
+
+## 实例
+
+```c#
+using System;
+
+class Program
+{
+  static void Main(string[] args)
+  {
+      int a = 21;
+      int b = 10;
+      
+      if (a == b)
+      {
+          Console.WriteLine("Line 1 - a 等于 b");
+      }
+      else
+      {
+          Console.WriteLine("Line 1 - a 不等于 b");
+      }
+      if (a < b)
+      {
+          Console.WriteLine("Line 2 - a 小于 b");
+      }
+      else
+      {
+          Console.WriteLine("Line 2 - a 不小于 b");
+      }
+      if (a > b)
+      {
+          Console.WriteLine("Line 3 - a 大于 b");
+      }
+      else
+      {
+          Console.WriteLine("Line 3 - a 不大于 b");
+      }
+      /* 改变 a 和 b 的值 */
+      a = 5;
+      b = 20;
+      if (a <= b)
+      {
+         Console.WriteLine("Line 4 - a 小于或等于 b");
+      }
+      if (b >= a)
+      {
+         Console.WriteLine("Line 5 - b 大于或等于 a");
+      }
+  }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```
+Line 1 - a 不等于 b
+Line 2 - a 不小于 b
+Line 3 - a 大于 b
+Line 4 - a 小于或等于 b
+Line 5 - b 大于或等于 a
+```
+
+# 逻辑运算符
+
+下表显示了 C# 支持的所有逻辑运算符。假设变量 **A** 为布尔值 true，变量 **B** 为布尔值 false，则：
+
+| 运算符 | 描述                                                         | 实例              |
+| :----- | :----------------------------------------------------------- | :---------------- |
+| &&     | 称为逻辑与运算符。如果两个操作数都非零，则条件为真。         | (A && B) 为假。   |
+| \|\|   | 称为逻辑或运算符。如果两个操作数中有任意一个非零，则条件为真。 | (A \|\| B) 为真。 |
+| !      | 称为逻辑非运算符。用来逆转操作数的逻辑状态。如果条件为真则逻辑非运算符将使其为假。 | !(A && B) 为真。  |
+
+### 实例
+
+请看下面的实例，了解 C# 中所有可用的逻辑运算符：
+
+## 实例
+
+```c#
+using System;
+
+namespace OperatorsAppl
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool a = true;
+            bool b = true;
+           
+            if (a && b)
+            {
+               Console.WriteLine("Line 1 - 条件为真");
+            }
+            if (a || b)
+            {
+                Console.WriteLine("Line 2 - 条件为真");
+            }
+            /* 改变 a 和 b 的值 */
+            a = false;
+            b = true;
+            if (a && b)
+            {
+                Console.WriteLine("Line 3 - 条件为真");
+            }
+            else
+            {
+                Console.WriteLine("Line 3 - 条件不为真");
+            }
+            if (!(a && b))
+            {
+                Console.WriteLine("Line 4 - 条件为真");
+            }
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```c#
+Line 1 - 条件为真
+Line 2 - 条件为真
+Line 3 - 条件不为真
+Line 4 - 条件为真
+```
+
+# 判断润年练习
+
+闰年的判断规则是：普通年份能被 4 整除但不能被 100 整除，或者世纪年份能被 400 整除。以下是几种不同的实现方式：
+
+```c#
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 示例年份
+        int year = 2024;
+        bool isLeapYear = IsLeapYear(year);
+        if (isLeapYear)
+        {
+            Console.WriteLine($"{year} 是闰年。");
+        }
+        else
+        {
+            Console.WriteLine($"{year} 不是闰年。");
+        }
+    }
+
+    static bool IsLeapYear(int year)
+    {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        {
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+在上述代码中，定义了一个名为 `IsLeapYear` 的方法，该方法接收一个整数类型的参数 `year`，表示要判断的年份。在方法内部，使用 `if-else` 语句根据闰年的判断规则进行判断，如果是闰年则返回 `true`，否则返回 `false`。在 `Main` 方法中，调用 `IsLeapYear` 方法进行判断，并输出相应的结果。
+
+# 判断
+
+## 判断语句
+
+C# 提供了以下类型的判断语句。点击链接查看每个语句的细节。
+
+| 语句                                                         | 描述                                                         |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| [if 语句](https://www.runoob.com/csharp/csharp-if.html)      | 一个 **if 语句** 由一个布尔表达式后跟一个或多个语句组成。    |
+| [if...else 语句](https://www.runoob.com/csharp/csharp-if-else.html) | 一个 **if 语句** 后可跟一个可选的 **else 语句**，else 语句在布尔表达式为假时执行。 |
+| [嵌套 if 语句](https://www.runoob.com/csharp/csharp-nested-if.html) | 您可以在一个 **if** 或 **else if** 语句内使用另一个 **if** 或 **else if** 语句。 |
+| [switch 语句](https://www.runoob.com/csharp/csharp-switch.html) | 一个 **switch** 语句允许测试一个变量等于多个值时的情况。     |
+| [嵌套 switch 语句](https://www.runoob.com/csharp/csharp-nested-switch.html) | 您可以在一个 **switch** 语句内使用另一个 **switch** 语句。   |
