@@ -1996,3 +1996,483 @@ namespace DecisionMaking
 没有匹配的值
 a 的准确值是 100
 ```
+
+# 异常捕获
+
+在 C# 中，异常捕获是一种处理程序运行时错误的机制，它允许你在代码中捕获并处理可能出现的异常，从而避免程序因未处理的异常而崩溃。C# 提供了 `try-catch-finally` 语句块来实现异常捕获和处理。下面为你详细介绍：
+
+### 基本语法
+
+```csharp
+try
+{
+    // 可能会抛出异常的代码
+}
+catch (ExceptionType1 ex1)
+{
+    // 处理 ExceptionType1 类型的异常
+}
+catch (ExceptionType2 ex2)
+{
+    // 处理 ExceptionType2 类型的异常
+}
+finally
+{
+    // 无论是否发生异常，都会执行的代码
+}
+```
+
+- **`try` 块**：包含可能会抛出异常的代码。
+- **`catch` 块**：用于捕获并处理特定类型的异常。可以有多个 `catch` 块，每个块处理不同类型的异常。
+- **`finally` 块**：可选的，无论是否发生异常，`finally` 块中的代码都会执行。
+
+### 示例代码
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // 尝试将字符串转换为整数，可能会抛出 FormatException 异常
+            string input = "abc";
+            int number = int.Parse(input);
+            Console.WriteLine($"转换后的数字是: {number}");
+        }
+        catch (FormatException ex)
+        {
+            // 处理 FormatException 异常
+            Console.WriteLine($"输入格式错误: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            // 处理其他类型的异常
+            Console.WriteLine($"发生未知异常: {ex.Message}");
+        }
+        finally
+        {
+            // 无论是否发生异常，都会执行的代码
+            Console.WriteLine("程序结束。");
+        }
+    }
+}
+```
+
+### 代码解释
+
+1. **`try` 块**：尝试将字符串 `"abc"` 转换为整数，由于 `"abc"` 不是有效的整数格式，`int.Parse` 方法会抛出 `FormatException` 异常。
+2. **`catch (FormatException ex)` 块**：捕获 `FormatException` 异常，并输出错误信息。
+3. **`catch (Exception ex)` 块**：捕获其他类型的异常，并输出未知异常信息。
+4. **`finally` 块**：无论是否发生异常，都会输出 "程序结束。"。
+
+### 捕获特定异常
+
+你可以根据不同的异常类型编写不同的 `catch` 块来处理特定的异常。例如，在进行文件操作时，可能会抛出 `FileNotFoundException` 异常：
+
+```csharp
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // 尝试打开一个不存在的文件
+            string filePath = "nonexistentfile.txt";
+            string content = File.ReadAllText(filePath);
+            Console.WriteLine(content);
+        }
+        catch (FileNotFoundException ex)
+        {
+            // 处理文件未找到异常
+            Console.WriteLine($"文件未找到: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            // 处理其他类型的异常
+            Console.WriteLine($"发生未知异常: {ex.Message}");
+        }
+    }
+}
+```
+
+### 抛出异常
+
+在某些情况下，你可能需要手动抛出异常。可以使用 `throw` 关键字来抛出异常：
+
+```csharp
+using System;
+
+class Program
+{
+    static int Divide(int a, int b)
+    {
+        if (b == 0)
+        {
+            // 手动抛出 DivideByZeroException 异常
+            throw new DivideByZeroException("除数不能为零。");
+        }
+        return a / b;
+    }
+
+    static void Main()
+    {
+        try
+        {
+            int result = Divide(10, 0);
+            Console.WriteLine($"结果: {result}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            // 处理除零异常
+            Console.WriteLine($"除零错误: {ex.Message}");
+        }
+    }
+}
+```
+
+在上述代码中，`Divide` 方法检查除数是否为零，如果为零，则手动抛出 `DivideByZeroException` 异常。在 `Main` 方法中，使用 `try-catch` 块捕获并处理该异常。
+
+#  switch 语句
+
+一个 **switch** 语句允许测试一个变量等于多个值时的情况。每个值称为一个 case，且被测试的变量会对每个 **switch case** 进行检查。
+
+## 语法
+
+C# 中 **switch** 语句的语法：
+
+```c#
+switch(expression){
+    case constant-expression  :
+       statement(s);
+       break; 
+    case constant-expression  :
+       statement(s);
+       break; 
+  
+    /* 您可以有任意数量的 case 语句 */
+    default : /* 可选的 */
+       statement(s);
+       break; 
+}
+```
+
+**switch** 语句必须遵循下面的规则：
+
+- **switch** 语句中的 **expression** 必须是一个整型或枚举类型，或者是一个 class 类型，其中 class 有一个单一的转换函数将其转换为整型或枚举类型。
+- 在一个 switch 中可以有任意数量的 case 语句。每个 case 后跟一个要比较的值和一个冒号。
+- case 的 **constant-expression** 必须与 switch 中的变量具有相同的数据类型，且必须是一个常量。
+- 当被测试的变量等于 case 中的常量时，case 后跟的语句将被执行，直到遇到 **break** 语句为止。
+- 当遇到 **break** 语句时，switch 终止，控制流将跳转到 switch 语句后的下一行。
+- 不是每一个 case 都需要包含 **break**。如果 case 语句为空，则可以不包含 **break**，控制流将会 *继续* 后续的 case，直到遇到 break 为止。
+- C# 不允许从一个 case 部分继续执行到下一个 case 部分。如果 case 语句中有已经执行，则必须包含 **break** 或其他跳转语句。
+- 一个 **switch** 语句可以有一个可选的 **default** 语句，在 switch 的结尾。default 语句用于在上面所有 case 都不为 true 时执行的一个任务。default 也需要包含 **break** 语句，这是一个良好的习惯。
+- C# 不支持从一个 case 标签显式贯穿到另一个 case 标签。如果要使 C# 支持从一个 case 标签显式贯穿到另一个 case 标签，可以使用 goto 一个 switch-case 或 goto default。
+
+## 实例1
+
+以下实例用于判断当前是星期几：
+
+```c#
+using System;
+
+namespace MyApplication
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      int day = 4;
+      switch (day) 
+      {
+        case 1:
+          Console.WriteLine("Monday");
+          break;
+        case 2:
+          Console.WriteLine("Tuesday");
+          break;
+        case 3:
+          Console.WriteLine("Wednesday");
+          break;
+        case 4:
+          Console.WriteLine("Thursday");
+          break;
+        case 5:
+          Console.WriteLine("Friday");
+          break;
+        case 6:
+          Console.WriteLine("Saturday");
+          break;
+        case 7:
+          Console.WriteLine("Sunday");
+          break;
+      }    
+    }
+  }
+}
+```
+
+执行结果根据当天日期有所不同，我这里执行这天的结果为：
+
+```
+Thursday
+```
+
+## 实例2
+
+包含了 **default** 语句：
+
+```c#
+using System;
+
+namespace DecisionMaking
+{
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /* 局部变量定义 */
+            char grade = 'B';
+
+            switch (grade)
+            {
+                case 'A':
+                    Console.WriteLine("很棒！");
+                    break;
+                case 'B':
+                    Console.WriteLine("也很棒！");
+                case 'C':
+                    Console.WriteLine("做得好");
+                    break;
+                case 'D':
+                    Console.WriteLine("您通过了");
+                    break;
+                case 'F':
+                    Console.WriteLine("最好再试一下");
+                    break;
+                default:
+                    Console.WriteLine("无效的成绩");
+                    break;
+            }
+            Console.WriteLine("您的成绩是 {0}", grade);
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```
+做得好
+您的成绩是 B
+```
+
+## 嵌套 switch 语句
+
+您可以把一个 **switch** 作为一个外部 **switch** 的语句序列的一部分，即可以在一个 **switch** 语句内使用另一个 **switch** 语句。即使内部和外部 switch 的 case 常量包含共同的值，也没有矛盾。
+
+### 语法
+
+C# 中 **嵌套 switch** 语句的语法：
+
+```c#
+switch(ch1) 
+{
+   case 'A': 
+      printf("这个 A 是外部 switch 的一部分" );
+      switch(ch2) 
+      {
+         case 'A':
+            printf("这个 A 是内部 switch 的一部分" );
+            break;
+         case 'B': /* 内部 B case 代码 */
+      }
+      break;
+   case 'B': /* 外部 B case 代码 */
+}
+```
+
+### 实例
+
+```c#
+using System;
+
+namespace DecisionMaking
+{
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 100;
+            int b = 200;
+
+            switch (a)
+            {
+                case 100:
+                    Console.WriteLine("这是外部 switch 的一部分");
+                    switch (b)
+                    {
+                        case 200:
+                        Console.WriteLine("这是内部 switch 的一部分");
+                        break;
+                    }
+                    break;
+            }
+            Console.WriteLine("a 的准确值是 {0}", a);
+            Console.WriteLine("b 的准确值是 {0}", b);
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```c#
+这是外部 switch 的一部分
+这是内部 switch 的一部分
+a 的准确值是 100
+b 的准确值是 200
+```
+
+# 循环
+
+## 循环类型
+
+C# 提供了以下几种循环类型。点击链接查看每个类型的细节。
+
+| 循环类型                                                     | 描述                                                         |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| [while 循环](https://www.runoob.com/csharp/csharp-while-loop.html) | 当给定条件为真时，重复语句或语句组。它会在执行循环主体之前测试条件。 |
+| [for/foreach 循环](https://www.runoob.com/csharp/csharp-for-loop.html) | 多次执行一个语句序列，简化管理循环变量的代码。               |
+| [do...while 循环](https://www.runoob.com/csharp/csharp-do-while-loop.html) | 除了它是在循环主体结尾测试条件外，其他与 while 语句类似。    |
+| [嵌套循环](https://www.runoob.com/csharp/csharp-nested-loops.html) | 您可以在 while、for 或 do..while 循环内使用一个或多个循环。  |
+
+## while 循环
+
+只要给定的条件为真，C# 中的 **while** 循环语句会重复执行一个目标语句。
+
+### 语法
+
+C# 中 **while** 循环的语法：
+
+```
+while(condition)
+{
+   statement(s);
+}
+```
+
+在这里，**statement(s)** 可以是一个单独的语句，也可以是几个语句组成的代码块。**condition** 可以是任意的表达式，当为任意非零值时都为真。当条件为真时执行循环。
+
+当条件为假时，程序流将继续执行紧接着循环的下一条语句。
+
+在这里，*while* 循环的关键点是循环可能一次都不会执行。当条件被测试且结果为假时，会跳过循环主体，直接执行紧接着 while 循环的下一条语句。
+
+### 实例
+
+```c#
+using System;
+
+namespace Loops
+{
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /* 局部变量定义 */
+            int a = 10;
+
+            /* while 循环执行 */
+            while (a < 20)
+            {
+                Console.WriteLine("a 的值： {0}", a);
+                a++;
+            }
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```c#
+a 的值： 10
+a 的值： 11
+a 的值： 12
+a 的值： 13
+a 的值： 14
+a 的值： 15
+a 的值： 16
+a 的值： 17
+a 的值： 18
+a 的值： 19
+```
+
+# break语句
+
+C# 中 **break** 语句有以下两种用法：
+
+1. 当 **break** 语句出现在一个循环内时，循环会立即终止，且程序流将继续执行紧接着循环的下一条语句。
+2. 它可用于终止 **switch** 语句中的一个 case。
+
+如果您使用的是嵌套循环（即一个循环内嵌套另一个循环），break 语句会停止执行最内层的循环，然后开始执行该块之后的下一行代码。
+
+## 语法
+
+C# 中 **break** 语句的语法：
+
+```
+break;
+```
+
+```c#
+using System;
+
+namespace Loops
+{
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /* 局部变量定义 */
+            int a = 10;
+
+            /* while 循环执行 */
+            while (a < 20)
+            {
+                Console.WriteLine("a 的值： {0}", a);
+                a++;
+                if (a > 15)
+                {
+                    /* 使用 break 语句终止 loop */
+                    break;
+                }
+            }
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```c#
+a 的值： 10
+a 的值： 11
+a 的值： 12
+a 的值： 13
+a 的值： 14
+a 的值： 15
+```
