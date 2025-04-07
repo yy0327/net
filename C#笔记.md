@@ -601,6 +601,37 @@ public class Program
 
 遵循这些命名规范可以使代码更易于阅读、理解和维护。
 
+# C#常量
+
+常量和变量都是用来存储数据的容器，在定义时都需要指明数据类型，它们唯一的区别是：变量（Variable）中所存放的值是允许改变的，而常量（Constant）中存放的值不允许改变。
+
+与变量不同的是，常量在第一次被赋值后值就不能再改变。定义常量需要使用关键字 **const** 来完成。
+
+具体的语法形式如下：
+
+```c#
+const 数据类型 常量名 = 值;
+```
+
+需要注意的是，在定义常量时必须为其赋值，因为不赋值的话以后就再也不能赋值了。另外，也可以同时定义多个常量。
+
+在程序中使用常量也会带来很多好处，包括增强了程序的可读性以及便于程序的修改。例如在一个计算率的程序中，为了保证程序中的税率统一，设置一个名为 TAX 的常量来完成，如果需要修改税率只修改该常量的值即可。
+
+【实例1】分别求圆的面积和周长，并使用常量存放 π 的值，将 π 的值定义为3.14。
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        const double PI = 3.14;
+        int r = 3;  //存放半径
+        Console.WriteLine("圆的周长是：" + 2 * PI * r);
+        Console.WriteLine("圆的面积是：" + PI * r * r);
+    }
+}	
+```
+
 # 类型转换方法
 
 在 C# 中，类型转换是将一个数据类型的值转换为另一个数据类型的过程。
@@ -658,7 +689,7 @@ string stringValue = intValue.ToString(); // 将 int 转换为字符串
 
 下面的实例显示了一个显式的类型转换：
 
-```
+```c#
 using System;
 
 namespace TypeConversionApplication
@@ -1997,6 +2028,44 @@ namespace DecisionMaking
 a 的准确值是 100
 ```
 
+##  三元表达式
+
+在 C# 里，三元表达式也叫条件运算符，它是一种简洁的条件判断结构，能够根据给定条件的值来返回不同的结果。其基本语法如下：
+
+```c#
+condition ? expression1 : expression2;
+```
+
+### 语法解释
+
+- `condition`：这是一个布尔表达式，会对其进行求值，结果为 `true` 或者 `false`。
+
+- `expression1`：当 `condition` 的结果为 `true` 时，返回此表达式的值。
+
+- `expression2`：当 `condition` 的结果为 `false` 时，返回此表达式的值。
+
+- ### 示例代码
+
+  ```c#
+  using System;
+  
+  class Program
+  {
+      static void Main()
+      {
+          int num = 10;
+          string result = num > 5 ? "数字大于 5" : "数字小于等于 5";
+          Console.WriteLine(result);
+      }
+  }
+  ```
+
+  ### 代码解释
+
+  在这个示例中，先定义了一个整数变量 `num` 并赋值为 10。接着使用三元表达式来判断 `num` 是否大于 5。因为 `num` 大于 5，所以条件 `num > 5` 的结果为 `true`，那么就会返回 `expression1` 的值，也就是字符串 `"数字大于 5"`，最后将这个结果输出。
+
+  三元表达式通常用于简化简单的 `if-else` 语句，让代码更加简洁易读。不过，若条件判断较为复杂，还是建议使用 `if-else` 语句，以保证代码的可读性和可维护性。
+
 # 异常捕获
 
 在 C# 中，异常捕获是一种处理程序运行时错误的机制，它允许你在代码中捕获并处理可能出现的异常，从而避免程序因未处理的异常而崩溃。C# 提供了 `try-catch-finally` 语句块来实现异常捕获和处理。下面为你详细介绍：
@@ -2377,7 +2446,7 @@ while(condition)
 
 在这里，*while* 循环的关键点是循环可能一次都不会执行。当条件被测试且结果为假时，会跳过循环主体，直接执行紧接着 while 循环的下一条语句。
 
-### 实例
+### 实例1
 
 ```c#
 using System;
@@ -2417,6 +2486,208 @@ a 的值： 16
 a 的值： 17
 a 的值： 18
 a 的值： 19
+```
+
+### 实例2
+
+```c#
+using System;
+
+namespace DataTypeApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("请输入班级人数");
+            int count = Convert.ToInt32(Console.ReadLine());
+            int sum = 0; //存放总成绩
+            int i = 1;//声明一个循环变量用来记录循环次数
+            while (i <= count)
+            {
+                Console.WriteLine("请输入第{0}个学员的学习成绩：", i);
+                int score = Convert.ToInt32(Console.ReadLine());
+                //表示把每一个学员的成绩累加到总成绩当中
+                sum += score;
+                i++;
+            }
+            Console.WriteLine("总成绩为{0},平均成绩为{1}",sum,sum/count);
+
+
+        }
+    }
+}
+
+
+```
+
+## do...while 循环
+
+不像 **for** 和 **while** 循环，它们是在循环头部测试循环条件。**do...while** 循环是在循环的尾部检查它的条件。
+
+**do...while** 循环与 while 循环类似，但是 do...while 循环会确保至少执行一次循环。
+
+### 语法
+
+C# 中 **do...while** 循环的语法：
+
+```c#
+do
+{
+   statement(s);
+
+}while( condition );
+```
+
+请注意，条件表达式出现在循环的尾部，所以循环中的 statement(s) 会在条件被测试之前至少执行一次。
+
+如果条件为真，控制流会跳转回上面的 do，然后重新执行循环中的 statement(s)。这个过程会不断重复，直到给定条件变为假为止。
+
+```c#
+using System;
+
+namespace Loops
+{
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /* 局部变量定义 */
+            int a = 10;
+
+            /* do 循环执行 */
+            do
+            {
+               Console.WriteLine("a 的值： {0}", a);
+                a = a + 1;
+            } while (a < 20);
+
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```c#
+a 的值： 10
+a 的值： 11
+a 的值： 12
+a 的值： 13
+a 的值： 14
+a 的值： 15
+a 的值： 16
+a 的值： 17
+a 的值： 18
+a 的值： 19
+```
+
+## for循环
+
+一个 **for** 循环是一个允许您编写一个执行特定次数的循环的重复控制结构。
+
+### 语法
+
+C# 中 **for** 循环的语法：
+
+```c#
+for ( init; condition; increment )
+{
+   statement(s);
+}
+```
+
+下面是 for 循环的控制流：
+
+1. **init** 会首先被执行，且只会执行一次。这一步允许您声明并初始化任何循环控制变量。您也可以不在这里写任何语句，只要有一个分号出现即可。
+
+2. 接下来，会判断 **condition**。如果为真，则执行循环主体。如果为假，则不执行循环主体，且控制流会跳转到紧接着 for 循环的下一条语句。
+
+3. 在执行完 for 循环主体后，控制流会跳回上面的 **increment** 语句。该语句允许您更新循环控制变量。该语句可以留空，只要在条件后有一个分号出现即可。
+
+4. 条件再次被判断。如果为真，则执行循环，这个过程会不断重复（循环主体，然后增加步值，再然后重新判断条件）。在条件变为假时，for 循环终止。
+
+   ```c#
+   using System;
+   
+   namespace Loops
+   {
+       
+       class Program
+       {
+           static void Main(string[] args)
+           {
+               /* for 循环执行 */
+               for (int a = 10; a < 20; a = a + 1)
+               {
+                   Console.WriteLine("a 的值： {0}", a);
+               }
+               Console.ReadLine();
+           }
+       }
+   }
+   ```
+
+   当上面的代码被编译和执行时，它会产生下列结果：
+
+   ```
+   a 的值： 10
+   a 的值： 11
+   a 的值： 12
+   a 的值： 13
+   a 的值： 14
+   a 的值： 15
+   a 的值： 16
+   a 的值： 17
+   a 的值： 18
+   a 的值： 19
+   ```
+
+## C# continue 语句
+
+C# 中的 **continue** 语句有点像 **break** 语句。但它不是强迫终止，continue 会跳过当前循环中的代码，强迫开始下一次循环。
+
+对于 **for** 循环，**continue** 语句会导致执行条件测试和循环增量部分。对于 **while** 和 **do...while** 循环，**continue** 语句会导致程序控制回到条件测试上。
+
+C# 中 **continue** 语句的语法：
+
+```c#
+continue;
+```
+
+代码
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        for(int i = 1; i <= 10; i++)
+        {
+            if (i == 4)//i等于4的时候跳过
+            {
+                continue;
+            }
+            Console.WriteLine(i);
+        }
+    }  
+}
+```
+
+当上面的代码被编译和执行时，它会产生下列结果：
+
+```c#
+1
+2
+3
+5
+6
+7
+8
+9
+10
 ```
 
 # break语句
@@ -2476,3 +2747,116 @@ a 的值： 13
 a 的值： 14
 a 的值： 15
 ```
+
+# Random随机数
+
+在 C# 里，`Random` 类主要用于生成伪随机数。以下为你详细介绍其使用方法：
+
+### 1. 创建 `Random` 类的实例
+
+在使用 `Random` 类生成随机数之前，需要先创建它的一个实例。示例如下：csharp
+
+```csharp
+Random random = new Random();
+```
+
+### 2. 生成随机整数
+
+可以使用 `Next` 方法来生成随机整数，它有几种不同的重载形式：
+
+#### 2.1 生成一个非负随机整数
+
+```csharp
+int randomNumber = random.Next();
+```
+
+这种方式会生成一个大于等于 0 的随机整数。
+
+#### 2.2 生成一个指定范围内的随机整数
+
+```csharp
+int minValue = 1;
+int maxValue = 10;
+int randomInRange = random.Next(minValue, maxValue);
+```
+
+上述代码会生成一个大于等于 `minValue` 且小于 `maxValue` 的随机整数。
+
+### 3. 生成随机双精度浮点数
+
+使用 `NextDouble` 方法可以生成一个大于等于 0.0 且小于 1.0 的随机双精度浮点数：
+
+```csharp
+double randomDouble = random.NextDouble();
+```
+
+### 完整示例代码
+
+以下是一个完整的 C# 程序，展示了如何使用 `Random` 类生成随机整数和随机双精度浮点数：
+
+```csharp
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 创建 Random 类的实例
+        Random random = new Random();
+
+        // 生成一个非负随机整数
+        int randomNumber = random.Next();
+        Console.WriteLine($"生成的非负随机整数: {randomNumber}");
+
+        // 生成一个指定范围内的随机整数
+        int minValue = 1;
+        int maxValue = 10;
+        int randomInRange = random.Next(minValue, maxValue);
+        Console.WriteLine($"生成的 {minValue} 到 {maxValue} 之间的随机整数: {randomInRange}");
+
+        // 生成一个随机双精度浮点数
+        double randomDouble = random.NextDouble();
+        Console.WriteLine($"生成的随机双精度浮点数: {randomDouble}");
+    }
+}
+```
+
+此程序先创建了 `Random` 类的一个实例，接着分别使用 `Next` 和 `NextDouble` 方法生成随机整数和随机双精度浮点数，最后将这些随机数输出到控制台。
+
+### 注意事项
+
+- 由于 `Random` 类是基于种子值生成伪随机数的，若在短时间内多次创建 `Random` 类的实例，可能会得到相同的随机数序列。为避免这种情况，建议在整个程序中只创建一个 `Random` 类的实例。
+
+- 若需要更高质量的随机数，可考虑使用 `System.Security.Cryptography.RandomNumberGenerator` 类。
+
+
+# C#枚举
+
+枚举是一组命名整型常量。枚举类型是使用 **enum** 关键字声明的。
+
+C# 枚举是值类型。换句话说，枚举包含自己的值，且不能继承或传递继承。
+
+```c#
+using System;
+using System.Diagnostics;
+
+namespace DataTypeApplication
+{
+    public enum Sesons
+    {
+        春,
+        夏,
+        秋,
+        冬,
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Sesons s = Sesons.春;
+            Console.WriteLine(s);//春
+        }
+    }
+}
+```
+
