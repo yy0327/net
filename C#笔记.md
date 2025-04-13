@@ -2860,3 +2860,373 @@ namespace DataTypeApplication
 }
 ```
 
+## 枚举练习
+
+```c#
+using System;  // 引入基础系统命名空间
+using System.Diagnostics;  // 引入诊断相关功能（虽然本例中未使用）
+
+namespace DataTypeApplication  // 定义命名空间
+{
+    // 定义QQ状态枚举
+    public enum QQState
+    {
+        OnLine = 1,   // 在线状态，显式赋值为1
+        OffLine,      // 离线状态，自动赋值为2
+        Leave,        // 离开状态，自动赋值为3
+        Busy,         // 忙碌状态，自动赋值为4
+        Qme,         // Q我吧状态，自动赋值为5
+    }
+
+    class Program  // 主程序类
+    {
+        static void Main(string[] args)  // 程序入口点
+        {
+            // 枚举练习：处理用户选择的QQ状态
+            
+            // 显示状态选择菜单
+            Console.WriteLine("请选择你的QQ在线状态 1--OnLine 2--OffLine 3--Leave 4--Busy 5--Qme");
+            
+            // 读取用户输入
+            string input = Console.ReadLine();
+            
+            // 使用switch处理不同输入
+            switch(input)
+            {
+                case "1":
+                    // 将字符串"1"转换为QQState.OnLine枚举值
+                    QQState s1 = (QQState)Enum.Parse(typeof(QQState), input);
+                    Console.WriteLine("你选择的状态是{0}", s1);
+                    break;
+                case "2":
+                    QQState s2 = (QQState)Enum.Parse(typeof(QQState), input);
+                    Console.WriteLine("你选择的状态是{0}", s2);
+                    break;
+                case "3":
+                    QQState s3 = (QQState)Enum.Parse(typeof(QQState), input);
+                    Console.WriteLine("你选择的状态是{0}", s3);
+                    break;
+                case "4":
+                    QQState s4 = (QQState)Enum.Parse(typeof(QQState), input);
+                    Console.WriteLine("你选择的状态是{0}", s4);
+                    break;
+                case "5":
+                    QQState s5 = (QQState)Enum.Parse(typeof(QQState), input);
+                    Console.WriteLine("你选择的状态是{0}", s5);
+                    break;
+            }
+        }
+    }
+}
+```
+
+# C# 结构体（Struct）
+
+在 C# 中，结构体（struct）是一种值类型（value type），用于组织和存储相关数据。
+
+在 C# 中，结构体是值类型数据结构，这样使得一个单一变量可以存储各种数据类型的相关数据。
+
+**struct** 关键字用于创建结构体。
+
+结构体是用来代表一个记录，假设您想跟踪图书馆中书的动态，您可能想跟踪每本书的以下属性：
+
+- Title
+- Author
+- Subject
+- Book ID
+
+```c#
+// 定义一个名为 Person 的结构体，用于表示一个人的基本信息
+// 结构体是值类型，通常用于封装少量相关的数据
+public struct Person
+{
+    // 定义一个公共的字符串类型字段 _name，用于存储人的姓名
+    public string _name;
+    // 定义一个公共的整数类型字段 _age，用于存储人的年龄
+    public int _age;
+    // 定义一个公共的字符类型字段 _gender，用于存储人的性别
+    public char _gender;
+}
+
+// 定义一个名为 Program 的类，这是 C# 程序的主类
+class Program
+{
+    // 定义程序的入口点方法 Main
+    // static 表示这是一个静态方法，无需创建 Program 类的实例即可调用
+    // void 表示该方法没有返回值
+    // string[] args 是命令行参数数组，用于接收程序启动时传递的参数
+    static void Main(string[] args)
+    {
+        // 声明一个 Person 类型的变量 zsPerson，用于表示一个名为张三的人
+        Person zsPerson;
+        // 给 zsPerson 的 _name 字段赋值为 "张三"
+        zsPerson._name = "张三";
+        // 给 zsPerson 的 _age 字段赋值为 18
+        zsPerson._age = 18;
+        // 给 zsPerson 的 _gender 字段赋值为 '男'
+        zsPerson._gender = '男';
+
+        // 声明一个 Person 类型的变量 lsPerson，用于表示一个名为李四的人
+        Person lsPerson;
+        // 给 lsPerson 的 _name 字段赋值为 "李四"
+        lsPerson._name = "李四";
+        // 给 lsPerson 的 _age 字段赋值为 22
+        lsPerson._age = 22;
+        // 给 lsPerson 的 _gender 字段赋值为 '女'
+        lsPerson._gender = '女';
+
+        // 使用 Console.WriteLine 方法将 lsPerson 的 _name 字段的值输出到控制台
+        Console.WriteLine(lsPerson._name);
+    }
+}
+```
+
+这段代码的主要功能是定义一个 `Person` 结构体来表示人的基本信息，然后在 `Main` 方法中创建两个 `Person` 结构体的实例，分别表示 "张三" 和 "李四"，最后将 "李四" 的姓名输出到控制台。
+
+# C# 数组（Array）
+
+数组是一个存储相同类型元素的固定大小的顺序集合。数组是用来存储数据的集合，通常认为数组是一个同一类型变量的集合。
+
+声明数组变量并不是声明 number0、number1、...、number99 一个个单独的变量，而是声明一个就像 numbers 这样的变量，然后使用 numbers[0]、numbers[1]、...、numbers[99] 来表示一个个单独的变量。数组中某个指定的元素是通过索引来访问的。
+
+所有的数组都是由连续的内存位置组成的。最低的地址对应第一个元素，最高的地址对应最后一个元素。
+
+## 初始化数组
+
+声明一个数组不会在内存中初始化数组。当初始化数组变量时，您可以赋值给数组。
+
+数组是一个引用类型，所以您需要使用 **new** 关键字来创建数组的实例。
+
+例如：
+
+```c#
+double[] balance = new double[10];
+```
+
+## 赋值给数组
+
+您可以通过使用索引号赋值给一个单独的数组元素，比如：
+
+```c#
+double[] balance = new double[10];
+balance[0] = 4500.0;
+```
+
+您可以在声明数组的同时给数组赋值，比如：
+
+```c#
+double[] balance = { 2340.0, 4523.69, 3421.0};
+```
+
+您也可以创建并初始化一个数组，比如：
+
+```c#
+int [] marks = new int[5]  { 99,  98, 92, 97, 95};
+```
+
+在上述情况下，你也可以省略数组的大小，比如：
+
+```c#
+int [] marks = new int[]  { 99,  98, 92, 97, 95};
+```
+
+您也可以赋值一个数组变量到另一个目标数组变量中。在这种情况下，目标和源会指向相同的内存位置：
+
+```c#
+int [] marks = new int[]  { 99,  98, 92, 97, 95};
+int[] score = marks;
+```
+
+当您创建一个数组时，C# 编译器会根据数组类型隐式初始化每个数组元素为一个默认值。例如，int 数组的所有元素都会被初始化为 0。
+
+## 访问数组元素
+
+元素是通过带索引的数组名称来访问的。这是通过把元素的索引放置在数组名称后的方括号中来实现的。例如：
+
+```c#
+double salary = balance[9];
+```
+
+## 实例1
+
+```c#
+using System;
+using System.Diagnostics;
+
+namespace DataTypeApplication
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //int[] balance = new double[10]; 和下面是一样的
+            int[] nums = { 1, 34, 3, 4, 5, 6, 7, 8, 9, 0 };
+            int max = 0;
+            int min = 0;
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if(nums[i]>max)
+                {
+                    max = nums[i];
+                }
+                if (nums[i] < min)
+                {
+                    min = nums[i];
+                }
+                
+                
+            }
+            Console.WriteLine("这个数组最大值是{0},最小值是{1}", max, min);
+        }
+    }
+}
+
+
+```
+
+## 实例2
+
+```c#
+using System;
+using System.Diagnostics;
+
+namespace DataTypeApplication
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] names = { "李白", "貂蝉", "鲁班", "典韦", "韩信" };
+            //不想要最后的值for (int i = 0; i < names.Length-1; i++)
+            for (int i = 0; i < names.Length; i++)
+            {
+                Console.WriteLine(names[i]);
+            }
+            
+        }
+    }
+}
+
+```
+
+## 实例3
+
+```c#
+using System;
+using System.Diagnostics;
+
+namespace DataTypeApplication
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //如果元素是正数则将这个位置的元素的值+1
+            //如果元素是负数则将这个位置的元素的值-1,如果是0则不变
+            int[] nums = { 1, -2, 3, -4, 5, -6, 0 };
+            //对每一个元素进行判断
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > 0)
+                {
+                    nums[i] += 1;
+                }
+                else if (nums[i] < 0) 
+                {
+                    nums[i] -= 1;
+                }
+                else
+                {
+
+                }
+            }
+            for (int i = 0; i < nums.Length; i++)
+            {
+                Console.WriteLine(nums[i]);
+            }
+
+        }
+    }
+}
+
+
+```
+
+结果
+
+```c#
+2
+-3
+4
+-5
+6
+-7
+0
+```
+
+## 冒泡排序
+
+```c#
+// 引入 System 命名空间，该命名空间包含了许多常用的类型和功能
+using System;
+// 引入 System.Diagnostics 命名空间，不过在本代码中未实际使用
+using System.Diagnostics;
+
+// 定义一个名为 DataTypeApplication 的命名空间
+namespace DataTypeApplication
+{
+    // 定义一个名为 Program 的类
+    class Program
+    {
+        // 程序的入口点，Main 方法
+        static void Main(string[] args)
+        {
+            // 定义一个整型数组 nums，并初始化其元素
+            int[] nums = { 9, 4, 3, 13, 1, 6, 11 };
+
+            // 外层循环控制排序的轮数，总共需要进行数组长度减 1 轮
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                // 内层循环用于比较相邻元素并进行交换
+                for (int j = 0; j < nums.Length - 1 - i; j++)
+                {
+                    // 如果当前元素大于下一个元素
+                    if (nums[j] > nums[j + 1])
+                    {
+                        // 使用临时变量 temp 来交换两个元素的值
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+                    }
+                }
+            }
+
+            // 遍历排序后的数组并输出每个元素
+            for (int i = 0; i < nums.Length; i++)
+            {
+                Console.WriteLine(nums[i]);
+            }
+
+            // 等待用户按下任意键，防止控制台窗口立即关闭
+            Console.ReadKey();
+        }
+    }
+}
+```
+
+结果
+
+```c#
+1
+3
+4
+6
+9
+11
+13
+```
+
